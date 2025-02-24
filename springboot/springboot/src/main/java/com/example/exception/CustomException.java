@@ -1,0 +1,20 @@
+package com.example.exception;
+
+/**
+ * 自定异常
+ */
+public class CustomException extends RuntimeException {
+    private String msg;
+
+    public CustomException(String msg) {
+        this.msg = msg;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+}
