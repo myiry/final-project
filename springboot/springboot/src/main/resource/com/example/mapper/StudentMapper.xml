@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.StudentMapper">
+    <select id="selectAll" resultType="com.example.entity.Student">
+        SELECT * FROM student WHERE 1=1
+        <if test="name != null">
+            AND name like concat('%', #{name}, '%')
+
+        </if>
+       <if test="sex != null">
+            AND sex like concat('%', #{sex}, '%')
+        </if>
+        <if test="username != null">
+            AND username like concat('%', #{username}, '%')
+        </if>
+        order by id desc
+    </select>
+</mapper>

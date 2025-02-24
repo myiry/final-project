@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.GradeMapper">
+
+    <insert id="insert">
+        insert into grade (course_id, student_id, score, comment, feedback) VALUES (#{courseId},#{studentId},#{score},#{comment},#{feedback})
+    </insert>
+
+    <update id="update">
+        update grade set feedback =#{feedback},comment = #{comment}, score = #{score} where id = #{id}
+
+    </update>
+
+    <select id="selectAll" resultType="com.example.entity.Grade">
+        select grade.*, student.name as studentName, course.name as courseName
+            from grade
+            left join student  on student.id = grade.student_id
+            left join course  on course.id = grade.course_id
+        <where>
+            <if test = "studentName !=null">and student.name like concat('%',#{studentName}, '%')</if>
+            <if test = "courseName !=null">and course.name like concat('%',#{courseName}, '%')</if>
+            <if test = "studentId !=null">and grade.student_id = #{studentId}</if>
+        </where>
+        order by id desc
+    </select>
+</mapper>
